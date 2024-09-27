@@ -1,71 +1,44 @@
-<?php require "partials/header.php"?>
-<section class="about-faq sec-padd">
-<?php require "partials/banner.php"?>
-    <div class="container">
-        <div class="section-title text-center mb-5">
-            <h2>Unlocking Potential &amp; Igniting Change for Sustainable Development</h2>
-        </div>
-        <!-- <h2>about us &amp; faq's</h2>-->
-        <div class="row">
-            <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="about-info">
-                    <h3 style="text-align:center">VISION</h3>
-                    <div class="logo">
-                        <img style="display:block;width: 250px;height:150px;object-fit:cover;margin-left:auto;margin-right:auto;margin-bottom:40px;"
-                            src="img/eye.webp">
-                    </div>
-                    <p>Transforming India’s North East Region social development landscape through data-driven insights,
-                        monitoring & evaluation tools, and innovative practices.</p>
-                    <br>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="about-info">
-                    <h3 style="text-align:center">MISSION</h3>
-                    <div class="logo">
-                        <img style="display:block;width: 250px;height:150px;object-fit:cover;margin-left:auto;margin-right:auto;margin-bottom:40px;"
-                            src="img/rocket.12781954887214,cg_true">
-                    </div>
-                    <p>Championing an inclusive approach to impactful development in Northeast India and beyond, through
-                        co-creation with local stakeholders and effective partnerships.</p>
-                    <br>
-                </div>
-            </div>
+<?php require "partials/header.php";?>
 
-        </div>
-    </div>
-</section>
-
-
-<section class="about-faq sec-padd py-5">
+<main class="about-us-page">
+    <?php require "partials/banner.php"; ?>
+    
+    <section class="intro">
     <div class="section-title text-center mb-5">
-        <h2>Business Strategy Operations</h2>
-    </div>
-    <div class="container">
-        <div class="wow fadeInUp" data-wow-delay="0.1s">
-            <p>FrameImpacts is is a social impact and development frontier agency that engages in diverse pivotal
-                activities to foster sustainable social development. We champion a collaborative approach, working
-                closely with our clients to co-design and strategize programs, conduct rigorous social impact
-                assessments, research, and generate data-driven insights for informed decision-making</p>
+		<h2>About FrameImpacts Pvt. Ltd.</h2>
+	</div>
+        <div class="container">
+            <p class="lead">FrameImpacts Pvt. Ltd. is a forward-thinking consultancy firm dedicated to fostering sustainable development and empowering businesses and communities across Northeast India. As an MCA-listed company, we specialize in delivering comprehensive solutions in Social Impact, Business Management, and Health Management consulting.</p>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="about-faq sec-padd py-5">
-    <div class="container">
-        <div class="section-title text-center mb-5">
-            <h2>message &amp; faq's</h2>
+
+    <section class="vision-mission">
+        <div class="container">
+            <div class="card vision">
+                <h2>Vision</h2>
+                <p>Transforming India's North East Region social development landscape through data-driven insights, monitoring & evaluation tools, and innovative practices.</p>
+            </div>
+            <div class="card mission">
+                <h2>Mission</h2>
+                <p>Championing an inclusive approach to impactful development in Northeast India and beyond, through co-creation with local stakeholders and effective partnerships.</p>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="about-info">
-                    <h4>Chairman of Board of Director’s Message</h4>
-                    <br>
-                    <div class="text">
-                        <div class="wow fadeInUp" data-wow-delay="0.1s">
-                            <p>Dear Esteemed Partners and Collaborators,<BR><BR>
+    </section>
 
-                                I am thrilled to welcome you to FrameImpacts Pvt. Ltd., an innovative consultancy
+    <section class="strategy">
+        <div class="container">
+            <h2>Business Strategy Operations</h2>
+            <p>FrameImpacts is a social impact and development frontier agency that engages in diverse pivotal activities to foster sustainable social development. We champion a collaborative approach, working closely with our clients to co-design and strategize programs, conduct rigorous social impact assessments, research, and generate data-driven insights for informed decision-making.</p>
+        </div>
+    </section>
+
+    <section class="message-faq">
+        <div class="container">
+            <div class="message">
+                <h2>Chairman's Message</h2>
+                <p>Dear Esteemed Partners and Collaborators,</p>
+                <p>I am thrilled to welcome you to FrameImpacts Pvt. Ltd.,an innovative consultancy
                                 dedicated to catalyzing transformative change in Northeast India. As Chairman of the
                                 Board,
                                 I take immense pride in our vision to empower local NGOs and development agencies with
@@ -87,24 +60,14 @@
                                 the dedication and credibility of our team. Together, let's create a brighter future for
                                 the region.
                                 We eagerly anticipate the opportunity to collaborate with you.<BR><BR>
-
-                                Best Regards,
-                            </p>
+                                </p>
+                                <p>Best Regards,</p>
+                                <p>Lalhmangaih Hauzel</p>
+                          
                         </div>
-
-                    </div>
-
-                    <!-- <div class="link_btn">
-                                <a href="#" class="thm-btn">know more <i class="vc_btn3-icon fas fa-chevron-right"></i></a>
-                                <div class="sign"><img src="images/resource/sign.jpg" alt=""></div>
-                            </div>
-                            -->
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-                <div id="main">
-
-                    <div class="accordion" id="faq">
+                        <div class="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="accordion" id="faq">
                         <div class="card">
                             <div class="card-header" id="faqhead1">
                                 <a href="#" class="btn-header-link text-truncate" data-toggle="collapse"
@@ -152,61 +115,38 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-<section class="client-section bggray">
-    <div class="section-title text-center mb-5">
-        <h2>Partners</h2>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="client-outer">
-                    <div class="slick-slider client-slider">
-                        <div class="wow-outer">
-                            <div class="item wow slideInLeft" data-wow-delay=".1s">
-                                <img src="img/client/dci.png" class="img-fluid" alt="Imageteam">
-                            </div>
-                        </div>
-                        <div class="wow-outer">
-                            <div class="item wow slideInLeft" data-wow-delay=".3s">
-                                <img src="img/client/highland.png" class="img-fluid" alt="Imageteam">
-                            </div>
-                        </div>
-                        <div class="wow-outer">
-                            <div class="item wow slideInLeft" data-wow-delay=".5s">
-                                <img src="img/client/neicord.png" class="img-fluid" alt="Imageteam">
-                            </div>
-                        </div>
-
-                        <div class="wow-outer">
-                            <div class="item wow slideInLeft" data-wow-delay=".9s">
-                                <img src="img/client/prime.png" class="img-fluid" alt="Imageteam">
-                            </div>
-                        </div>
-                        <div class="wow-outer">
-                            <div class="item wow slideInLeft" data-wow-delay=".10s">
-                                <img src="img/client/rilum.png" class="img-fluid" alt="Imageteam">
-                            </div>
-                        </div>
-
-
-
-
                     </div>
-
-                </div>
-            </div>
-
-
-
-
         </div>
+    </section>
+
+<section class="partners">
+  <div class="container">
+    <h2>Our Partners</h2>
+    <div class="partner-logos">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="client-outer">
+              <div class="slick-slider client-slider">
+                <?php
+                $partners = ['dci', 'highland', 'neicord', 'prime', 'rilum'];
+                foreach ($partners as $partner) { ?>
+                  <div class="wow-outer" style="height:60px;width:10px;">
+                    <div class="item wow slideInLeft" data-wow-delay=".1s">
+                      <img src='img/client/<?= $partner ?>.png' alt="ucfirst(<?= $partner ?>) ">
+                    </div>
+                  </div>
+                <?php } ?>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
+
+</main>
+
 <?php require "partials/banner2.php"?>
 <?php require "partials/footer.php"?>

@@ -38,7 +38,7 @@ $admin_id = $_SESSION['admin_id'];
 
                 move_uploaded_file($file, $target_file);
 
-                $query = 'INSERT INTO blog_posts (title, content, image_path, created_by) VALUES (:title, :content, :image_path, :created_by)';
+                $query = 'INSERT INTO blogs (title, content, image_path, created_by) VALUES (:title, :content, :image_path, :created_by)';
                 $db->query($query, [
                     ':title' => $title,
                     ':content' => $content,
@@ -46,7 +46,7 @@ $admin_id = $_SESSION['admin_id'];
                     ':created_by' => $admin_id // Set the admin ID
                 ]);
 
-                header("Location: blog_posts.php");
+                header("Location:/blog");
                 exit;
             }
             ?> 

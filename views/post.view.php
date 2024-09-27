@@ -1,68 +1,78 @@
 <?php require "partials/header.php"; ?>
 <?php require "partials/banner.php"; ?>
 
-<div class="container">
+<div class="container post-page">
     <div class="row">
-        <!-- Single Post Column -->
-        <div class="col-md-9">
-            <h1><?php echo htmlspecialchars($post['title']); ?></h1>
-            <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo htmlspecialchars($post['created_at']); ?></p>
-            <hr>
-            <?php if (!empty($post['image_path']) && file_exists('img/upload/' . $post['image_path'])): ?>
-                <img class="card-img-top custom-img" src="<?= 'img/upload/' . $post['image_path'] ?>" alt="Blog Post" />
-            <?php else: ?>
-                <p>No image available.</p>
-            <?php endif; ?>
-            <hr>
-            <p><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
-            <hr>
+        <!-- Main Content Column -->
+        <div class="col-lg-8">
+            <?php if (isset($post)): ?>
+                <article class="elegant-post">
+                    <header class="elegant-post__header">
+                        <h1 class="elegant-post__title"><?= htmlspecialchars($post['title']); ?></h1>
+                        <p class="elegant-post__meta">
+                            <i class="fas fa-feather-alt"></i> Posted on
+                            <?= (new DateTime($post['created_at']))->format('F j, Y') ?>
+                        </p>
+                    </header>
+                    <div class="elegant-post__image-container">
+                        <img class="elegant-post__image" src="<?= 'img/upload/' . $post['image_path'] ?>" alt="Post Image">
+                    </div>
+                    <div class="elegant-post__content">
+                        <p><?= nl2br(htmlspecialchars($post['content'])); ?></p>
+                    </div>
+                </article>
 
-            <!-- Comments Section -->
-            <div class="well">
-                <h4>Leave a Comment:</h4>
-                <form action="post.php?p_id=<?php echo $post['post_id']; ?>" method="post">
-                    <div class="form-group">
-                        <label for="author">Name:</label>
-                        <input type="text" name="author" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="comment" class="form-control" rows="3" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            <hr>
+                <!-- Comments Section -->
+                <section class="elegant-comments">
+                    <h3 class="elegant-comments__title">Comments</h3>
+
+                    <!-- Display existing comments -->
+                    <?php if (!empty($comments)): ?>
+                        <?php foreach ($comments as $comment): ?>
+                            <div class="elegant-comment">
+                                <p class="elegant-comment__meta">
+                                    <strong><?= htmlspecialchars($comment['comment_author']); ?></strong> on
+                                    <?= (new DateTime($comment['created_at']))->format('F j, Y') ?></p>
+                                <p class="elegant-comment__content"><?= nl2br(htmlspecialchars($comment['comment_content'])); ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="elegant-comments__none">No comments yet. Be the first to comment!</p>
+                    <?php endif; ?>
+
+                    <!-- Comment submission form -->
+                    <form action="post?p_id=<?= $post['post_id']; ?>" method="POST" class="elegant-comment-form">
+                        <input type="hidden" name="submit_comment" value="1">
+                        <div class="form-group">
+                            <label for="comment_author">Name:</label>
+                            <input type="text" class="form-control" id="comment_author" name="comment_author" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment_content">Comment:</label>
+                            <textarea class="form-control" id="comment_content" name="comment_content" rows="3"
+                                required style="resize: none;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Comment</button>
+                    </form>
+                    <?php if (isset($error)): ?>
+                        <p class="text-danger"><?= $error ?></p>
+                    <?php endif; ?>
+                </section>
+
+                <!-- ... rest of the code ... -->
+            <?php else: ?>
+                <div class="alert alert-danger">
+                    <strong>Error:</strong> Post not found.
+                </div>
+            <?php endif; ?>
         </div>
 
-        <!-- Blog Sidebar Widgets Column -->
-        <div class="col-md-3">
-            <!-- Recent Posts Widget -->
-            <div class="well">
-			<h4>Recent Posts</h4>
-			<div class="row">
-				<div class="col-lg-6">
-					<ul class="list-unstyled">
-                    <?php
-                            $recent_posts = $db->query('SELECT * FROM blog_posts ORDER BY created_at DESC LIMIT 5')->fetchAll();
-                            foreach ($recent_posts as $recent_post) {
-                                echo "<li><p><i class='fa fa-fw fa-clipboard'></i> <a href='post?p_id={$recent_post['post_id']}'>{$recent_post['title']}</a></p></li>";
-                            }
-                            ?>
-					</ul>
-				</div>
-				<!-- /.col-lg-6 -->
-			</div>
-			<!-- /.row -->
-		</div>
-            <!-- Categories Widget -->
-
-            <!-- Side Widget -->
-            <div class="well">
-                <h4>Side Widget</h4>
-                <p>This is a simple side widget to add extra content to your blog page.</p>
-            </div>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-lg-4">
+            <?php require "partials/sidebar.php"; ?>
         </div>
     </div>
 </div>
+
 
 <?php require "partials/footer.php"; ?>

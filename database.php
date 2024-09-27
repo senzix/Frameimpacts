@@ -2,19 +2,22 @@
 //connect to database
 
 class Database{
-    public $con;
-    public function __CONSTRUCT($config,$username='root',$password='')
-    {
-        $dsn='mysql:'.http_build_query($config,'',';');
+    protected $pdo;
 
-        $this->con=new PDO($dsn,$username,$password,[
-
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+    public function __construct($config) {
+        if (!isset($config['dsn'], $config['username'], $config['password'])) {
+            throw new InvalidArgumentException('Invalid database configuration');
+        }
+        $this->pdo = new PDO($config['dsn'], $config['username'], $config['password']);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    public function query($query,$param=[]){
-        $stm= $this->con->prepare($query);
-        $stm->execute($param);
-        return $stm;
+
+    public function query($sql, $parameters = []) {
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute($parameters);
+        return $statement;
+    }
+    public function lastInsertId() {
+        return $this->pdo->lastInsertId();
     }
 }
-

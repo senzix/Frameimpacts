@@ -79,3 +79,23 @@
     
 })(jQuery);
 
+document.addEventListener('DOMContentLoaded', function() {
+    const megaDropdown = document.querySelector('.mega-dropdown');
+    const dropdownMenu = megaDropdown.querySelector('.dropdown-menu');
+
+    megaDropdown.addEventListener('mouseenter', function() {
+        dropdownMenu.style.display = 'block';
+    });
+
+    megaDropdown.addEventListener('mouseleave', function() {
+        dropdownMenu.style.display = 'none';
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!megaDropdown.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+});
+

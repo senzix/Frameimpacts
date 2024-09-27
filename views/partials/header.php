@@ -38,6 +38,7 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
 
@@ -60,17 +61,27 @@
 					<div class="col-lg-10 col-md-12">
 						<div class="header-box d-flex flex-row justify-content-end">
 							<div class="location-div header-item">
-								<div class="stm-iconbox d-flex align-items-center">
-									<i class="fas fa-map-marker-alt"></i>
-									<div class="stm-iconbox__info">
-										<div class="stm-iconbox__text stm-iconbox__text_nomargin">
-											Frameimpacts, Jamsuan Rd, Elim Veng, </div>
+							<div class="d-flex justify-content-between">
+        <div class="stm-iconbox d-flex align-items-center">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="stm-iconbox__info">
+                <div class="stm-iconbox__text stm-iconbox__text_nomargin">
+                    Frameimpacts Pvt.Ltd Ground Floor, </div>
+                <div class="stm-iconbox__description">
+				Gllory Abode,Nongrah,Near Asha Bhavan,Shiliiong Meghalaya-793006.INDIA</Meghalaya-793006></div>
+            </div>
+        </div>
 
-										<div class="stm-iconbox__description">
-											New Lamka, Churachandpur, Manipur 795128. </div>
-
-									</div>
-								</div>
+        <div class="stm-iconbox d-flex align-items-center">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="stm-iconbox__info">
+                <div class="stm-iconbox__text stm-iconbox__text_nomargin">
+				Frameimpacts Pvt.Ltd Top Floor,</div>
+                <div class="stm-iconbox__description">
+				Jamsuan Rd,Elim Veng,New Lamka,Churachandpur,Manipur 795128. </div>
+            </div>
+        </div>
+    </div>
 							</div>
 							<div class="location-div header-item">
 								<div class="stm-iconbox  d-flex align-items-center">
@@ -108,7 +119,6 @@
 							<div class="form-group m-0">
 								<select id="select-office" class="form-control">
 									<option selected>Lamka Office</option>
-									<option href="/admin">Admin</option>
 							</div>
 							</select>
 						</div>
@@ -125,7 +135,7 @@
 	<div class="navigation" id="navigation">
 		<div class="header-inner" id="header-inner">
 			<nav class="navbar navbar-expand-lg my-navbar p-0">
-				<a class="navbar-brand" href="/"><img src="img/logo.svg" /></a>
+				<a class="navbar-brand ml-2" href="/"><img src="img/logo.svg" alt="Logo" /></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
@@ -140,55 +150,21 @@
 							<a class="nav-link " href="/">Home</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/aboutus">Aboutus</a>
+							<a class="nav-link" href="/aboutus">About Us</a>
 						</li>
-
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Services</a>
 							<ul class="dropdown-menu small-menu">
-								<a href="/capacitybuilding">Capacity Building</a>
-								<a href="/codesign">Co-Design Frameworks</a>
-								<a href="/startup">Start-Up Mentoring</a>
-								<a href="/ras">RAS</a>
+								<a href="/industry">Industry</a>
 								<a href="/proneurship">Proneurship Program</a>
-								<!--<a href="ecfo.html">ECFO</a>
-			 <a href="management-consulting.php">Management Consulting</a>
-			 <a href="business-closerwrapping-up.php">Business Closer/Wrapping Up</a>-->
+
 							</ul>
 						</li>
-
 						<li class="nav-item">
-							<a class="nav-link" href="/our-team">Our Team</a>
-						</li>
-
-
-						<!-- <li class="nav-item">
-		<a class="nav-link" href="#">clients</a>
-	  </li>
-	  <li class="nav-item">
-		<a class="nav-link" href="articles.php">Resource</a>
-	  </li>
-
-		<li class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Partner</a>
-		  <ul class="dropdown-menu small-menu">
-			 <a href="usa.php">USA</a>
-			 <a href="india.php">India</a>
-			 <a href="spain.php">Spain</a>
-			 <a href="cyprus.php">Cyprus</a>
-			 <a href="#">Russia</a>
-			 <a href="#">S. Korea</a>
-		  </ul>
-	  </li>-->
-						<li class="nav-item">
-							<a class="nav-link" href="/blog">Blog</a>
+							<a class="nav-link" href="/articles">Articles</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/library">Published Library</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/contact">Contactus</a>
+							<a class="nav-link" href="/classroom">Classroom</a>
 						</li>
 					</ul>
 
@@ -202,12 +178,12 @@
 							<div class="social-icon-style-8">
 								<ul class="extra-small-icon d-flex ml-lg-3">
 									<li>
-										<a class="instagram" href="" target="_blank">
+										<a class="instagram" href="https://www.instagram.com/frame_impacts?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
 											<i class="fab fa-instagram"></i></a>
 									</li>
-									<li><a class="facebook-f" href="" target="_blank">
+									<li><a class="facebook-f" href="https://www.facebook.com/profile.php?id=61563545922308&mibextid=ZbWKwL" target="_blank">
 											<i class="fab fa-facebook-f"></i></a></li>
-									<li><a class="linkedin-in" href="" target="_blank">
+									<li><a class="linkedin-in" href="https://www.linkedin.com/in/frameimpacts" target="_blank">
 											<i class="fab fa-linkedin-in"></i></a></li>
 								</ul>
 							</div>

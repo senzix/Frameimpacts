@@ -1,6 +1,3 @@
-
-
-
 @media only screen and (max-width:576px){
 .slogan{
  display:none!important;  
@@ -351,6 +348,74 @@ overflow-x:hidden!important;
 
 }
 
+@media only screen and (max-width: 992px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        bottom: 0;
+        width: 300px;
+        padding-top: 50px;
+        background-color: #fff;
+        z-index: 1000;
+        transition: right 0.3s ease-in-out;
+        overflow-y: auto;
+    }
 
+    .navbar-collapse.show {
+        right: 0;
+    }
 
+    body.nav-open {
+        overflow: hidden;
+    }
 
+    body.nav-open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .navbar-toggler {
+        z-index: 1001;
+        position: relative;
+    }
+
+    .navbar-toggler span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #000;
+        margin: 5px 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navbar-toggler.collapsed span:nth-child(1) {
+        transform: rotate(0);
+    }
+
+    .navbar-toggler.collapsed span:nth-child(2) {
+        opacity: 1;
+    }
+
+    .navbar-toggler.collapsed span:nth-child(3) {
+        transform: rotate(0);
+    }
+
+    .navbar-toggler:not(.collapsed) span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .navbar-toggler:not(.collapsed) span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar-toggler:not(.collapsed) span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+}

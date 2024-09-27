@@ -1,125 +1,67 @@
-<footer id="footer" class="footer style_1" style="background-color:#1c2331;">
-
-  <div class="widgets_row">
+<footer id="footer" class="footer">
+<div
+class="parallax-bg">
     <div class="container">
-      <div class="footer_widgets">
-        <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="footer_logo">
-              <a href="index.php" class="mb-3 d-flex ">
-                <img src="img/text.png" alt="" width="200px;">
-              </a>
-              <p class="text-white">Frameimpacts - Before we talk destination, we shine a spotlight across your organization
-                to fully understand its people, processes, and technology.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-            <section id="recent-posts-4" class="widget widget_recent_entries">
-              <h4 class="text-uppercase text-white fw-bold">recent news</h4>
-              <ul>
-                <li>
-                  <a class="text-white" href="">A digital prescription for the pharma industry</a>
-                  <span class="post-date text-white">September 3, 2021</span>
-                </li>
-                <li>
-                  <a class="text-white" href="">Harvest great ideas from your company best assets</a>
-                  <span class="post-date text-white">August 25, 2021</span>
-                </li>
-              </ul>
-            </section>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <section id="nav_menu-2" class="widget widget_nav_menu">
-              <h4 class="widget_title text-white text-uppercase">extra links</h4>
-              <div class="menu-extra-links-container">
-                <ul id="menu-extra-links" class="menu">
-                  <li class="menu-item ">
-                    <a class="text-white text-uppercase" href="/aboutus">About</a>
-                  </li>
-                  <li  class="menu-item">
-                    <a class="text-white text-uppercase" href="#">News</a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="text-white text-uppercase" href="contact">Contacts</a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="text-white text-uppercase" href="#">Testimonials</a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="text-white text-uppercase" href="#">Typography</a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="text-white text-uppercase" href="#">Services</a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="text-white text-uppercase" href="#">Careers</a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="text-white text-uppercase" href="/our-team">Our team</a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="text-white text-uppercase" href="#">Shop</a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="text-white text-uppercase" href="#">Our approach</a>
-                  </li>
-                </ul>
-              </div>
-            </section>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <section class="form_widget">
-              <h4 class="widget_title text-uppercase text-white">subscribe</h4>
-              <form class="" method="post">
-                <div class="mc4wp-form-fields">
-                  <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Enter your email" required="">
-                    <span class="input-group-btn">
-                      <button class="btn" title="submit" type=""><i class="far fa-envelope"></i></button>
-                    </span>
-                  </div>
-
-                  <p class="text-white">Get latest updates and offers.</p>
-                  <a href="https://api.whatsapp.com/send?phone=+918837404545&text=Hello." class="float" target="_blank">
-<img src="img/whatsapp.svg" class="img-fluid"/>
-</a>
-                </div>
-              </form>
-            </section>
-          </div>
+      <div class="row align-items-center">
+        <div class="col-lg-8 col-md-7">
+          <h2 class="footer-heading">Featured Insights: Frameimpacts' most inspiring thought leadership on issues
+            shaping the future of business and society.</h2>
+        </div>
+        <div class="col-lg-4 col-md-5">
+          <form class="footer-subscribe-form" id="newsletterForm">
+            <input type="email" name="newsletter_email" placeholder="Enter Email" required>&nbsp;&nbsp;
+            <button type="submit" class="btn-subscribe">SUBSCRIBE</button>
+          </form>
+          <div id="newsletterMessage" class="mt-2" style="display: none;"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="copyright_row">
+  <div class="footer-bottom">
     <div class="container">
-      <div class="copyright_row_wr">
-        <div class="socials">
-          <ul>
-            <li>
-              <a href="" target="_blank" class="social-facebook">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li>
-              <a href="" target="_blank" class="social-twitter">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
-          </ul>
+      <div class="row justify-content-between align-items-center">
+        <div class="col-md-auto">
+          <div class="footer-social">
+            <span style="color:#e49928">FOLLOW US</span>
+            <a href="https://www.linkedin.com/in/frameimpacts" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61563545922308&mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/frame_impacts?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+          </div>
         </div>
-        <div class="copyright text-white">
-          &copy 2022 <a href="" target="_blank">
-            Consulting </a>Powered by <a href="" target="_blank">Frameimpacts</a> </div>
+        <div class="col-md-auto">
+          <div class="footer-language">
+            <span style="color:#e49928">Global | EN</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <p>&copy; 2024 Frameimpacts. All rights reserved. |
+          <a href="#">Careers</a> |
+          <a href="contact">Contact</a> |
+          <a href="our-team">Our Team</a> |
+          <a href="articles">Articles</a> |
+          <a href="aboutus">About</a> |
+          <a href="#">Offices</a> |
+          <a href="#">Privacy Policy</a> |
+          <a href="#">Terms of Use</a> |
+          <a href="#">Sitemap</a> |
+          <a href="#">Responsible Disclosure</a>
+        </p>
+      </div>
+      <div class="footer-copyright">
+        <p>Frameimpacts is a leading consultancy firm driving innovation and growth across industries. We provide
+          strategic insights and tailored solutions to help organizations overcome challenges and achieve success. With
+          our client-centric approach, we deliver measurable results for startups and established enterprises alike,
+          serving as your trusted partner in realizing your full potential.</p>
       </div>
     </div>
   </div>
 </footer>
-
-
 <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;">
   <i class="fas fa-long-arrow-alt-up"></i></a>
 
@@ -141,6 +83,110 @@
 
 <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
 <script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
+
+<!-- toggle password -->
+<script>
+  document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordField = document.getElementById('password');
+    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordField.setAttribute('type', type);
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+  });
+  // confrim password
+
+  function togglePasswordVisibility(passwordFieldId, toggleIconId) {
+    const passwordField = document.getElementById(passwordFieldId);
+    const toggleIcon = document.getElementById(toggleIconId);
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      toggleIcon.classList.remove("fa-eye");
+      toggleIcon.classList.add("fa-eye-slash");
+    } else {
+      passwordField.type = "password";
+      toggleIcon.classList.remove("fa-eye-slash");
+      toggleIcon.classList.add("fa-eye");
+    }
+  }
+
+</script>
+<!-- newsletter subscription -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('newsletterForm');
+    const messageDiv = document.getElementById('newsletterMessage');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      fetch('/newsletter-subscribe', {
+        method: 'POST',
+        body: new FormData(this),
+      })
+        .then(response => response.json())
+        .then(data => {
+          messageDiv.textContent = data.message;
+          messageDiv.className = `alert ${data.messageClass}`;
+          messageDiv.style.display = 'block';
+
+          if (data.messageClass === 'alert-success') {
+            form.reset();
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          messageDiv.textContent = 'An error occurred. Please try again later.';
+          messageDiv.className = 'alert alert-danger';
+          messageDiv.style.display = 'block';
+        });
+    });
+  });
+</script>
+
+<!-- for industry  -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const industryItems = document.querySelectorAll('.industry-item');
+    const industryDetails = document.querySelectorAll('.industry-detail');
+    const scrollOffset = 200; // Adjust this value as needed
+
+    function scrollToElement(element) {
+      setTimeout(() => {
+        const rect = element.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetPosition = rect.top + scrollTop - scrollOffset;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }, 100); // Small delay to ensure content is rendered
+    }
+
+    industryItems.forEach(item => {
+      item.addEventListener('click', function () {
+        const industryId = this.getAttribute('data-industry');
+
+        industryItems.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+
+        industryDetails.forEach(detail => {
+          if (detail.id === industryId) {
+            detail.style.display = 'block';
+            scrollToElement(detail);
+          } else {
+            detail.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Hide all industry details by default
+    industryDetails.forEach(detail => {
+      detail.style.display = 'none';
+    });
+  });
+</script>
 
 <script>
   $(document).ready(function ($) {
@@ -547,6 +593,42 @@
 
   });
 </script>
+
+
+
+<script>
+  $(document).ready(function () {
+    // Show login modal when the "Student Login" link is clicked
+    $('a[href="#"][data-toggle="modal"][data-target="#loginModal"]').click(function (e) {
+      e.preventDefault();
+      $('#loginModal').modal('show');
+    });
+
+    $('#switchToRegister').click(function () {
+      $('#loginModal').modal('hide');
+      $('#registerModal').modal('show');
+    });
+
+    $('#switchToLogin').click(function () {
+      $('#registerModal').modal('hide');
+      $('#loginModal').modal('show');
+    });
+
+    $('#loginForm').submit(function (e) {
+      e.preventDefault();
+      // Add your login logic here
+      console.log('Login submitted');
+    });
+
+    $('#registerForm').submit(function (e) {
+      e.preventDefault();
+      // Add your registration logic here
+      console.log('Registration submitted');
+    });
+  });
+</script>
+
+
 
 
 </body>
