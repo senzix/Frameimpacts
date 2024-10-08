@@ -27,4 +27,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Load the login view
-require "views/Reg&login.view.php";
+require "views/login.view.php";

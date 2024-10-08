@@ -6,16 +6,28 @@ $db = new Database($config['database']);
 
 $sliderItems = [
     [
-        'image' => 'img/Background.png',
-        'heading' => 'best of business planning <BR>advisor & specialist',
+        'image' => 'img/slide2.png',
+        'heading' => 'Elevating your business thinking<br> - Signup (Proneurship)',
         'buttonText' => 'More Detail',
-        'buttonLink' => '/aboutus'
+        'buttonLink' => '/proneurship'
     ],
     [
         'image' => 'img/Background.png',
-        'heading' => 'empowering proneurship innovate, <BR> adapt, succeed',
+        'heading' => 'Consult your Business',
         'buttonText' => 'More Detail',
-        'buttonLink' => '/proneurship'
+        'buttonLink' => '/industry?p_id=business'
+    ],
+    [
+        'image' => 'img/slide2.png',
+        'heading' => 'Consult about your social impacts',
+        'buttonText' => 'More Detail',
+        'buttonLink' => '/industry?p_id=social'
+    ],
+    [
+        'image' => 'img/Background.png',
+        'heading' => 'Consult about your health care',
+        'buttonText' => 'More Detail',
+        'buttonLink' => '/industry?p_id=health'
     ],
     // Add more slider items as needed
 ];
@@ -23,33 +35,33 @@ $sliderItems = [
 $services = [
     [
         'icon' => 'fas fa-plane-departure',
-        'title' => 'Tailored M&E Solutions for Sustainable Growth',
-        'description' => 'We assist organizations in adopting and strengthening their M&E systems, ensuring program effectiveness, transparency, and accountability that aligns with their unique goals and objectives.'
+        'title' => 'Catalysts for Social Transformation',
+        'description' => 'We design holistic social impact strategies that align with your organization\'s mission, driving measurable and sustainable change. Our approach combines local insights from Northeast India with global best practices, ensuring that each initiative fosters lasting community benefits and societal progress.'
     ],
     [
         'icon' => 'fas fa-chart-line',
-        'title' => 'Co-creation of Impactful and Sustainable Solutions Together',
-        'description' => 'We foster a collaborative approach to program design and evaluation, creating a learning environment that sparks innovative and impactful solutions tailored to specific needs.'
+        'title' => 'Empowering Business Evolution',
+        'description' => 'Our consulting services focus on unlocking growth and optimizing efficiency across enterprises, whether they are emerging startups or established organizations. We offer strategic guidance in financial management, market expansion, and overall transformation, helping businesses scale sustainably and achieve their long-term vision for success.'
     ],
     [
         'icon' => 'fas fa-luggage-cart',
-        'title' => 'Data-Driven Insights for Sustainable Development',
-        'description' => 'We provide valid and sophisticated insights from program data, enabling informed decision-making that maximizes impact and drives sustainable development across Northeast India.'
+        'title' => 'Revolutionizing Healthcare Excellence',
+        'description' => 'In a rapidly evolving healthcare landscape, we provide specialized consulting services that enhance operational efficiency and elevate patient care. By streamlining processes, adopting innovative technologies, and ensuring regulatory compliance, we empower healthcare organizations to deliver better, more efficient care to their communities.'
     ],
     [
         'icon' => 'fas fa-bullhorn',
-        'title' => 'Transformative Communication and Storytelling',
-        'description' => 'We transform complex reports into engaging narratives, helping organizations share their stories, garner support, and build positive social perceptions that amplify their impact.'
+        'title' => 'Insight-Driven Decision-Making',
+        'description' => 'Harnessing the power of data is key to maximizing impact. Our expertise enables organizations to transform information into actionable insights, enhancing program effectiveness and facilitating informed decision-making. We prioritize transparency and accountability, ensuring that your initiatives deliver real, measurable results.'
     ],
     [
         'icon' => 'fas fa-leaf',
-        'title' => 'Energy and Environment Consulting',
-        'description' => 'Scheduled transport operations, from broad market trends and strategy to the development of integrated commercial strategies.'
+        'title' => 'Sustainable Futures: Leading with Purpose',
+        'description' => 'We guide organizations toward responsible and sustainable growth, helping them implement environmentally sound practices that meet modern sustainability standards. Our consulting encompasses energy management and environmental compliance, ensuring that your business contributes positively to both the bottom line and the planet.'
     ],
     [
         'icon' => 'fas fa-users',
-        'title' => 'Capacity Building for Organizational Transformation',
-        'description' => 'We offer comprehensive capacity-building programs that equip teams with the skills and knowledge to conceptualize program design, implement social projects, develop outreach and communication strategies.'
+        'title' => 'Empowering Leaders for Tomorrow',
+        'description' => 'Our capacity-building programs are tailored to strengthen leadership and foster resilience within organizations. We empower teams with the skills and strategic knowledge to lead impactful projects, driving organizational growth and ensuring long-term adaptability in an ever-changing business landscape.'
     ]
 ];
 

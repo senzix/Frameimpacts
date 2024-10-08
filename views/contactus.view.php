@@ -12,18 +12,22 @@
                 <div class="bg-white rounded shadow-sm p-4 h-100">
                     <h3 class="mb-4">Contact Information</h3>
                     <ul class="list-unstyled">
-
+                        <h5>Locations:</h5>
                         <li class="mb-3">
-                            <h5>Lamka Office:</h5>
                             <i class="fas fa-map-marker-alt me-2 text-primary"></i>
-                            Frameimpacts Pvt.Ltd Top Floor,
-                            Jamsuan Rd,Elim Veng,New Lamka,Churachandpur,Manipur 795128.
+                            Frame Impacts
+                            Ground Floor, Glory Abode, Nongrah, Near Asha Bhava
+                            Shillong, Meghalaya - 793006 INDIA
+
                         </li>
                         <li class="mb-3">
-                            <h5>Shillong Office:</h5>
+
                             <i class="fas fa-map-marker-alt me-2 text-primary"></i>
-                            Frameimpacts Pvt.Ltd Ground Floor,
-                            Gllory Abode,Nongrah,Near Asha Bhavan,Shiliiong Meghalaya-793006.INDIA
+                            Frame Impacts
+                            2nd Floor, Frame Impacts Office
+                            Jamsuan Road, Elim Veng, New Lamka
+                            Churachandpur, Manipur - 795128 INDIA
+
                         </li>
                         <li class="mb-3">
                             <i class="fas fa-phone me-2 text-primary"></i>

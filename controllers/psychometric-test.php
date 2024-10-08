@@ -12,213 +12,244 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+// Handle test requests
+$testType = $_GET['test'] ?? null;
 
-// Fetch questions from the database
-$questions = $db->query("SELECT * FROM psychometric_questions ORDER BY question_id")->fetchAll();
+switch ($testType) {
 
-function calculateScore($answers) {
-    $scores = [
-        'extraversion' => 0,
-        'agreeableness' => 0,
-        'conscientiousness' => 0,
-        'neuroticism' => 0,
-        'openness' => 0
-    ];
 
-    $questionTraitMap = [
-        1 => ['extraversion', 1],
-        2 => ['extraversion', 1],
-        3 => ['extraversion', 1],
-        4 => ['extraversion', -1],
-        5 => ['extraversion', -1],
-        6 => ['agreeableness', 1],
-        7 => ['agreeableness', 1],
-        8 => ['agreeableness', 1],
-        9 => ['agreeableness', -1],
-        10 => ['agreeableness', -1],
-        11 => ['conscientiousness', 1],
-        12 => ['conscientiousness', 1],
-        13 => ['conscientiousness', 1],
-        14 => ['conscientiousness', -1],
-        15 => ['conscientiousness', -1],
-        16 => ['neuroticism', 1],
-        17 => ['neuroticism', 1],
-        18 => ['neuroticism', 1],
-        19 => ['neuroticism', -1],
-        20 => ['neuroticism', -1],
-        21 => ['openness', 1],
-        22 => ['openness', 1],
-        23 => ['openness', 1],
-        24 => ['openness', -1],
-        25 => ['openness', -1]
+    // numerical test
+    case 'numerical':
+        // Fetch questions from the database
+        $questions = $db->query("SELECT * FROM numerical_questions ORDER BY RAND() LIMIT 10")->fetchAll();
+
+        if ($questions) {
+            // Pass the questions data to the view
+            require 'views/psychometric/numerical.view.php';
+        } else {
+            echo "<p>No questions available.</p>";
+        }
+        break;
+    case 'store_results':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            // Ensure user is logged in
+            if (!isset($_SESSION['user_id'])) {
+                echo json_encode(['success' => false, 'message' => 'User not logged in']);
+                exit;
+            }
+
+            $user_id = $_SESSION['user_id'];
+            $correct_count = $data['correctCount'];
+            $total_questions = $data['totalQuestions'];
+            $percentage = $data['percentage'];
+            $detailed_results = json_encode($data['detailedResults']);
+
+            // Store results in database
+            $query = "INSERT INTO test_results (user_id, test_type, correct_count, total_questions, percentage, detailed_results, created_at) 
+                              VALUES (:user_id, 'numerical', :correct_count, :total_questions, :percentage, :detailed_results, NOW())";
+
+            try {
+                $result = $db->query($query, [
+                    ':user_id' => $user_id,
+                    ':correct_count' => $correct_count,
+                    ':total_questions' => $total_questions,
+                    ':percentage' => $percentage,
+                    ':detailed_results' => $detailed_results
+                ]);
+
+                if ($result) {
+                    $last_insert_id = $db->lastInsertId();
+                    echo json_encode(['success' => true, 'result_id' => $last_insert_id]);
+                } else {
+                    throw new Exception('Failed to insert record');
+                }
+            } catch (Exception $e) {
+                error_log('Error storing test results: ' . $e->getMessage());
+                echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+        }
+        break;
+
+    case 'view_results':
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+            exit();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        if (isset($_GET['id'])) {
+            // Fetch and display a specific result
+            $result_id = intval($_GET['id']);
+            $query = "SELECT * FROM test_results WHERE id = :id AND user_id = :user_id";
+            $params = [':id' => $result_id, ':user_id' => $user_id];
+
+            try {
+                $result = $db->query($query, $params)->fetch();
+
+                if (!$result) {
+                    $error = "No test result found.";
+                    require "views/error.view.php";
+                    return;
+                }
+
+                $detailed_results = json_decode($result['detailed_results'], true);
+
+                // Check if the user wants to download the PDF
+                if (isset($_GET['download']) && $_GET['download'] === 'pdf') {
+                    require_once 'vendor/autoload.php'; // Make sure you have TCPDF installed via Composer
+
+                    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+                    $pdf->SetCreator(PDF_CREATOR);
+                    $pdf->SetAuthor('Your Company Name');
+                    $pdf->SetTitle('Test Result');
+                    $pdf->SetSubject('Test Result');
+                    $pdf->SetKeywords('Test, Result, PDF');
+
+                    $pdf->AddPage();
+
+                    $html = '<h1>Test Result</h1>';
+                    $html .= '<p>Test taken on: ' . date('F j, Y, g:i a', strtotime($result['created_at'])) . '</p>';
+                    $html .= '<p>Test type: ' . htmlspecialchars(ucfirst($result['test_type'])) . '</p>';
+                    $html .= '<p>Correct answers: ' . $result['correct_count'] . ' out of ' . $result['total_questions'] . '</p>';
+                    $html .= '<p>Score: ' . number_format($result['percentage'], 2) . '%</p>';
+
+                    foreach ($detailed_results as $index => $question) {
+                        $html .= '<h3>Question ' . ($index + 1) . '</h3>';
+                        $html .= '<p>' . htmlspecialchars($question['question']) . '</p>';
+                        foreach (['A', 'B', 'C', 'D'] as $option) {
+                            $html .= '<p>';
+                            $html .= $option . ': ' . htmlspecialchars($question['options'][$option]);
+                            if ($question['userAnswer'] === $option) {
+                                $html .= ' (Your answer)';
+                            }
+                            if ($question['correctAnswer'] === $option) {
+                                $html .= ' (Correct answer)';
+                            }
+                            $html .= '</p>';
+                        }
+                    }
+
+                    $pdf->writeHTML($html, true, false, true, false, '');
+
+                    $pdf->Output('test_result_' . $result['id'] . '.pdf', 'D');
+                    exit;
+                }
+
+                require "views/psychometric/view_detailed_result.view.php";
+            } catch (Exception $e) {
+                error_log('Error fetching test result: ' . $e->getMessage());
+                $error = "An error occurred while fetching the test result.";
+            }
+        } else {
+            // Fetch and display a list of all results
+            $query = "SELECT id, test_type, percentage, created_at FROM test_results WHERE user_id = :user_id ORDER BY created_at DESC";
+            $params = [':user_id' => $user_id];
+
+            try {
+                $results = $db->query($query, $params)->fetchAll();
+                require "views/psychometric/view_results_list.view.php";
+            } catch (Exception $e) {
+                error_log('Error fetching test results: ' . $e->getMessage());
+                $error = "An error occurred while fetching the test results.";
+            }
+        }
+        break;
+
+
+
+        // ... existing code ...
+    case 'verbal':
+        // Logic for verbal reasoning test
+        break;
+    case 'logical':
+        // Logic for logical reasoning test
+        break;
+    case 'mechanical':
+        // Logic for mechanical reasoning test
+        break;
+    case 'spatial':
+        // Logic for spatial reasoning test
+        break;
+    case 'situational':
+        // Logic for situational judgement test
+        break;
+    case 'excel':
+        // Logic for excel test
+        break;
+    case 'critical':
+        // Logic for critical thinking test
+        break;
+    default:
+        require 'views/psychometric/psychometric.view.php';
+        break;
+}
+
+function calculateCareerSuggestions($answers) {
+    $careerScores = [
+        'Technology' => 0,
+        'Business' => 0,
+        'Creative' => 0,
+        'Healthcare' => 0,
+        'Education' => 0
     ];
 
     foreach ($answers as $questionId => $answer) {
-        if (isset($questionTraitMap[$questionId])) {
-            list($trait, $direction) = $questionTraitMap[$questionId];
-            $scores[$trait] += $answer * $direction;
+        switch ($questionId) {
+            case 'q1':
+                if ($answer === 'A') $careerScores['Technology'] += 2;
+                if ($answer === 'B') $careerScores['Creative'] += 2;
+                if ($answer === 'C') $careerScores['Business'] += 2;
+                if ($answer === 'D') $careerScores['Healthcare'] += 2;
+                break;
+            case 'q2':
+                if ($answer === 'A') $careerScores['Business'] += 2;
+                if ($answer === 'B') $careerScores['Education'] += 2;
+                if ($answer === 'C') $careerScores['Creative'] += 2;
+                if ($answer === 'D') $careerScores['Healthcare'] += 2;
+                break;
+            case 'q3':
+                if ($answer === 'A') $careerScores['Technology'] += 2;
+                if ($answer === 'B') $careerScores['Creative'] += 2;
+                if ($answer === 'C') $careerScores['Education'] += 2;
+                if ($answer === 'D') $careerScores['Technology'] += 2;
+                break;
+            // Add more cases for other questions
         }
     }
 
-    // Normalize scores to a 0-100 scale
-    $questionCount = 5; // 5 questions per trait
-    foreach ($scores as &$score) {
-        $score = ($score + $questionCount * 5) / ($questionCount * 10) * 100;
-        $score = max(0, min(100, $score)); // Ensure score is between 0 and 100
-    }
+    arsort($careerScores);
+    $topCareers = array_slice(array_keys($careerScores), 0, 3);
 
-    return $scores;
-}
-
-function interpretScore($scores) {
-    $traits = ['extraversion', 'agreeableness', 'conscientiousness', 'neuroticism', 'openness'];
-    $interpretation = '';
-    foreach ($traits as $trait) {
-        $interpretation .= ucfirst($trait) . ": ";
-        if ($scores[$trait] < 33) {
-            $interpretation .= "Low";
-        } elseif ($scores[$trait] < 66) {
-            $interpretation .= "Medium";
-        } else {
-            $interpretation .= "High";
+    $careerSuggestions = [];
+    foreach ($topCareers as $career) {
+        switch ($career) {
+            case 'Technology':
+                $careerSuggestions[] = 'Software Developer';
+                $careerSuggestions[] = 'Data Analyst';
+                break;
+            case 'Business':
+                $careerSuggestions[] = 'Business Analyst';
+                $careerSuggestions[] = 'Marketing Manager';
+                break;
+            case 'Creative':
+                $careerSuggestions[] = 'Graphic Designer';
+                $careerSuggestions[] = 'UX Designer';
+                break;
+            case 'Healthcare':
+                $careerSuggestions[] = 'Nurse';
+                $careerSuggestions[] = 'Medical Technician';
+                break;
+            case 'Education':
+                $careerSuggestions[] = 'Teacher';
+                $careerSuggestions[] = 'Educational Counselor';
+                break;
         }
-        $interpretation .= ". ";
     }
-    return $interpretation;
-}
 
-function fetchAllUserResults($db, $user_id) {
-    // Fetch all previous test results for the user
-    $query = "SELECT * FROM psychometric_results 
-              WHERE user_id = :user_id 
-              ORDER BY taken_at DESC";
-    return $db->query($query, [':user_id' => $user_id])->fetchAll();
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $currentQuestion = isset($_POST['current_question']) ? intval($_POST['current_question']) : 0;
-    
-    // Store all submitted answers in the session
-    if (!isset($_SESSION['test_answers'])) {
-        $_SESSION['test_answers'] = [];
-    }
-    foreach ($_POST['answers'] as $questionId => $answer) {
-        $_SESSION['test_answers'][$questionId] = intval($answer);
-    }
-    
-    $nextQuestion = $currentQuestion + 1;
-    
-    if ($nextQuestion < count($questions)) {
-        // Load the next question
-        $currentQuestion = $nextQuestion;
-        require 'views/psychometric/psychometric-test.view.php';
-    } else {
-        // Test is complete, calculate scores
-        $scores = calculateScore($_SESSION['test_answers']);
-        $interpretation = interpretScore($scores);
-        
-        // Check if the user has a recent identical result
-        $query = "SELECT * FROM psychometric_results 
-                  WHERE user_id = :user_id 
-                  ORDER BY taken_at DESC 
-                  LIMIT 1";
-        $lastResult = $db->query($query, [':user_id' => $user_id])->fetch();
-
-        $isDuplicate = false;
-        if ($lastResult) {
-            $isDuplicate = 
-                $lastResult['extraversion'] == $scores['extraversion'] &&
-                $lastResult['agreeableness'] == $scores['agreeableness'] &&
-                $lastResult['conscientiousness'] == $scores['conscientiousness'] &&
-                $lastResult['neuroticism'] == $scores['neuroticism'] &&
-                $lastResult['openness'] == $scores['openness'];
-        }
-
-        if ($isDuplicate) {
-            // Use the existing result
-            $resultMessage = "You have already submitted this exact test result. Here are your previous results:";
-        } else {
-            // Insert new result
-            $query = "INSERT INTO psychometric_results (user_id, extraversion, agreeableness, conscientiousness, neuroticism, openness, interpretation, taken_at) 
-                      VALUES (:user_id, :extraversion, :agreeableness, :conscientiousness, :neuroticism, :openness, :interpretation, NOW())";
-            $db->query($query, [
-                ':user_id' => $user_id,
-                ':extraversion' => $scores['extraversion'],
-                ':agreeableness' => $scores['agreeableness'],
-                ':conscientiousness' => $scores['conscientiousness'],
-                ':neuroticism' => $scores['neuroticism'],
-                ':openness' => $scores['openness'],
-                ':interpretation' => $interpretation
-            ]);
-            $resultMessage = "Thank you for completing the test. Here are your results:";
-        }
-
-        // Fetch all previous test results for the user
-        $previousResultsQuery = "SELECT * FROM psychometric_results 
-                                 WHERE user_id = :user_id 
-                                 ORDER BY taken_at DESC";
-        $previousResults = $db->query($previousResultsQuery, [':user_id' => $user_id])->fetchAll();
-
-        // Format the previous results for the view
-        $formattedPreviousResults = [];
-        foreach ($previousResults as $result) {
-            $formattedPreviousResults[] = [
-                'id' => $result['result_id'],
-                'date' => $result['taken_at'],
-                'scores' => [
-                    'extraversion' => $result['extraversion'],
-                    'agreeableness' => $result['agreeableness'],
-                    'conscientiousness' => $result['conscientiousness'],
-                    'neuroticism' => $result['neuroticism'],
-                    'openness' => $result['openness']
-                ],
-                'interpretation' => $result['interpretation']
-            ];
-        }
-
-        // Fetch user's name for the results page
-        $user = $db->query("SELECT name FROM users WHERE user_id = :user_id", [':user_id' => $user_id])->fetch();
-        
-        // Define trait colors for the view
-        $traitColors = [
-            'extraversion' => '#FF6B6B',
-            'agreeableness' => '#4ECDC4',
-            'conscientiousness' => '#45B7D1',
-            'neuroticism' => '#FFA07A',
-            'openness' => '#98D8C8'
-        ];
-
-        // Pass the result message, current scores, and previous results to the view
-        require 'views/psychometric/psychometric-test-results.view.php';
-        
-        // Clear the test answers from the session
-       
-    }
-}
-
-else if (isset($_GET['action']) && $_GET['action'] === 'view_previous') {
-    // Fetch all previous results using the new function
-    $previousResults = fetchAllUserResults($db, $user_id);
-
-    // Fetch user's name for the results page
-    $user = $db->query("SELECT name FROM users WHERE user_id = :user_id", [':user_id' => $user_id])->fetch();
-
-    // Define trait colors for the view
-    $traitColors = [
-        'extraversion' => '#FF6B6B',
-        'agreeableness' => '#4ECDC4',
-        'conscientiousness' => '#45B7D1',
-        'neuroticism' => '#FFA07A',
-        'openness' => '#98D8C8'
-    ];
-
-    require 'views/psychometric/psychometric-previous-results.view.php';
-}
-
-else{
-    // Start a new test
-    unset($_SESSION['test_answers']);
-    $currentQuestion = 0;
-    $_SESSION['test_answers'] = [];
-    require 'views/psychometric/psychometric-test.view.php';
+    return array_unique($careerSuggestions);
 }

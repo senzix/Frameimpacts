@@ -61,10 +61,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Load the register view
-require "views/Reg&login.view.php";
-
-// Display success message if available
-if (isset($_SESSION['success'])) {
-    echo $_SESSION['success'];
-    unset($_SESSION['success']);
-}
+require "views/register.view.php";

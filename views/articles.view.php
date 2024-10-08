@@ -26,8 +26,10 @@
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
+                <div class="news-post-error">
                 <div class="alert alert-info">
                     <strong>No blog posts available!</strong>
+                </div>
                 </div>
             <?php endif; ?>
 

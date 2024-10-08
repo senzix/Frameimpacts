@@ -1,6 +1,6 @@
 <?php require "partials/header.php" ?>
 
-<div class="slider-section">
+<div class="slider-section" style="background: linear-gradient(to right, #211265, #6d68d1);">
   <!-- revolution slider -->
   <section class="no-top no-bottom" aria-label="section-slider">
     <!-- home -->
@@ -9,13 +9,10 @@
         <ul>
           <?php foreach ($sliderItems as $item): ?>
             <li data-transition="fade" data-slotamount="10" data-masterspeed="1200" data-delay="5000">
-              <!--  BACKGROUND IMAGE -->
-              <img src="<?= $item['image'] ?>" alt="" data-start="0" data-bgposition="center center" data-kenburns="on"
-                data-duration="10000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="100"
-                data-bgpositionend="center center" />
+              <!-- Removed background image -->
               <div class="tp-caption slide-big-heading sft" data-x="center" data-y="160" data-speed="800" data-start="400"
                 data-easing="easeInOutExpo" data-endspeed="450"><span style="color:#ffffff;">
-                <?= $item['heading'] ?></span>
+                  <?= $item['heading'] ?></span>
               </div>
 
               <div class="tp-caption btn-slider sfb" data-x="center" data-y="300" data-speed="400" data-start="800"
@@ -32,7 +29,6 @@
   </section>
   <!-- revolution slider end -->
 </div>
-
 
 <section class="service what-bg">
   <div class="container">
@@ -64,21 +60,22 @@
 <section class="about-faq sec-padd py-5">
   <div class="container">
     <div class="section-title text-center mb-5">
-      <h2>about us &amp; faq's</h2>
+      <h2>About Us &amp; FAQs</h2>
     </div>
     <div class="row">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="about-info">
-          <h4>We counsel our clients on their key strategic issues, leveraging our deep industry expertise
-            and using analytical rigor to help</h4>
+          <h4>About Us
+          </h4>
           <br>
           <div class="text">
-            <p>We counsel our clients on their key strategic issues, leveraging our deep industry expertise
-              and using analytical rigor to help them make informed decisions more quickly and solve their
-              toughest and most critical business problems.<BR><BR>
+            <p>At Frame Impacts Pvt. Ltd., we partner with our clients to tackle their most pressing strategic
+              challenges. Drawing on our extensive industry knowledge and analytical expertise, we help organizations
+              make informed decisions swiftly and effectively address their most critical business issues.<BR><BR>
 
-              Founded in # by # partners, we now employ more than 1,000 professionals worldwide. We advise and
-              support global companies that are leaders in their industries.</p>
+              Founded in 2023 by a team of experienced professionals, we are committed to empowering organizations
+              across Northeast India and beyond. Our diverse team combines local insights with global best practices to
+              provide tailored consulting services that drive sustainable growth and meaningful impact.</p>
 
           </div>
 
@@ -94,43 +91,73 @@
           <div class="accordion" id="faq">
             <div class="card">
               <div class="card-header" id="faqhead1">
-                <a href="#" class="btn-header-link text-truncate" data-toggle="collapse" data-target="#faq1"
-                  aria-expanded="true" aria-controls="faq1">What does Frameimpacts do</a>
+                <a href="#" class="btn-header-link text-wrap collapsed" data-toggle="collapse" data-target="#faq1"
+                  aria-expanded="true" aria-controls="faq1">What services does Frame Impacts offer?</a>
               </div>
 
-              <div id="faq1" class="collapse show" aria-labelledby="faqhead1" data-parent="#faq">
+              <div id="faq1" class="collapse" aria-labelledby="faqhead1" data-parent="#faq">
                 <div class="card-body">
-                  We help entrepreneurs get ready to raise capital. Please note that we cannot help our clients raise
-                  capital. This usually consists of some or all of our services. This is a service that is heavily
-                  regulated.
+                  We provide a diverse range of consulting services designed to empower organizations across various sectors. Our expertise encompasses Business Management Consulting, Health Management Consulting, and Social Impact Management Consulting. Our focus is on optimizing operations, enhancing organizational impact, and driving sustainable growth for our clients.
                 </div>
               </div>
             </div>
             <div class="card">
               <div class="card-header" id="faqhead2">
                 <a href="#" class=" btn-header-link text-wrap collapsed" data-toggle="collapse" data-target="#faq2"
-                  aria-expanded="true" aria-controls="faq2">Which geographies you have worked already?</a>
+                  aria-expanded="true" aria-controls="faq2">Who can benefit from your consulting services?</a>
               </div>
 
               <div id="faq2" class="collapse" aria-labelledby="faqhead2" data-parent="#faq">
                 <div class="card-body">
-                  We help entrepreneurs get ready to raise capital. Please note that we cannot help our clients raise
-                  capital. This usually consists of some or all of our services. This is a service that is heavily
-                  regulated.
+                  Our consulting services are tailored for a wide array of organizations, including startups, established businesses, healthcare providers, and non-profits. Regardless of your industry, whether you're seeking to scale operations, improve service delivery, or develop effective strategies for social impact, we are equipped to support your journey.
                 </div>
               </div>
             </div>
             <div class="card">
               <div class="card-header" id="faqhead3">
                 <a href="#" class=" btn-header-link text-wrap collapsed" data-toggle="collapse" data-target="#faq3"
-                  aria-expanded="true" aria-controls="faq3">What makes you special from others?</a>
+                  aria-expanded="true" aria-controls="faq3">How does Frame Impacts ensure the effectiveness of its consulting services?</a>
               </div>
 
               <div id="faq3" class="collapse" aria-labelledby="faqhead3" data-parent="#faq">
                 <div class="card-body">
-                  We help entrepreneurs get ready to raise capital. Please note that we cannot help our clients raise
-                  capital. This usually consists of some or all of our services. This is a service that is heavily
-                  regulated.
+                  We utilize a holistic and integrated approach to consulting that emphasizes collaboration, transparency, and accountability. By aligning our strategies with your organization's unique needs and goals, we ensure that our initiatives are impactful and yield tangible results.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="faqhead4">
+                <a href="#" class=" btn-header-link text-wrap collapsed" data-toggle="collapse" data-target="#faq4"
+                  aria-expanded="true" aria-controls="faq4">Can you customize your services to meet our specific needs?</a>
+              </div>
+
+              <div id="faq4" class="collapse" aria-labelledby="faqhead4" data-parent="#faq">
+                <div class="card-body">
+                  Absolutely! We understand that each organization faces unique challenges and objectives. Our collaborative approach allows us to customize our consulting services to create practical and relevant solutions that address your specific requirements and promote organizational growth.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="faqhead5">
+                <a href="#" class=" btn-header-link text-wrap collapsed" data-toggle="collapse" data-target="#faq5"
+                  aria-expanded="true" aria-controls="faq5">How can we easily get in touch with Frame Impacts for a consultation?</a>
+              </div>
+
+              <div id="faq5" class="collapse" aria-labelledby="faqhead5" data-parent="#faq">
+                <div class="card-body">
+                  We welcome inquiries and discussions about how we can assist you. You can contact us via email at info@frameimpacts.com or call us at +91 7005223226. Our team is ready to explore your needs and provide insights on how we can help you achieve your goals.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="faqhead6">
+                <a href="#" class=" btn-header-link text-wrap collapsed" data-toggle="collapse" data-target="#faq6"
+                  aria-expanded="true" aria-controls="faq6">Where is Frame Impacts located?</a>
+              </div>
+
+              <div id="faq6" class="collapse" aria-labelledby="faqhead6" data-parent="#faq">
+                <div class="card-body">
+                  Frame Impacts operates from offices in Shillong and Lamka, enabling us to effectively serve clients throughout Northeast India. Our local presence allows us to connect deeply with the communities we work with and understand the regional landscape.
                 </div>
               </div>
             </div>
@@ -142,147 +169,26 @@
     </div>
   </div>
 </section>
-
-
-
-
-
-<!--
-<section class="achivement-bg">
+<section class="partners">
   <div class="container">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="about-info sec-padd text-center mb-5">
-          <div class="section-title">
-            <h2>testimonials</h2>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-12">
-        <div class="slick-slider blog-slider">
-          <div>
-            <div class="item text-white">
-              <div class="success_items">
-                <div class="user-profile-test">
-                  <a href="#"><img src="img/testimonial/1.jpg" alt="Success" class="user_img img-fluid"></a>
-                </div>
-                <div class="text-md-left text-center">
-                  <div class="info">
-                    <h4 class="no_stripe">
-                      <a href="" tabindex="0">
-                        Amanda Seyfried
-                      </a>
-                    </h4>
-                    <div class="position">Sales &amp; Marketing</div>
-                    <div class="company">Alien Ltd.</div>
-                    <p>Consulting WP really helped us achieve our financial goals.
-                      The slick presentation along with fantastic readability ensures
-                      that our financial standing is stable.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="item text-white">
-              <div class="success_items">
-
-                <div class="user-profile-test">
-                  <a href="#"> <img src="img/testimonial/2.jpg" alt="Success" class="user_img img-fluid"></a>
-                </div>
-                <div class="text-md-left text-center">
-                  <div class="info">
-                    <h4 class="no_stripe">
-                      <a href="" tabindex="0">
-                        Amanda Seyfried
-                      </a>
-                    </h4>
-                    <div class="position">Sales &amp; Marketing</div>
-                    <div class="company">Alien Ltd.</div>
-                    <p>Consulting WP really helped us achieve our financial goals.
-                      The slick presentation along with fantastic readability ensures
-                      that our financial standing is stable.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="item text-white">
-              <div class="success_items">
-
-                <div class="user-profile-test">
-                  <a href="#"><img src="img/testimonial/3.jpg" alt="Success" class="user_img img-fluid"></a>
-                </div>
-                <div class="text-md-left text-center">
-                  <div class="info">
-                    <h4 class="no_stripe">
-                      <a href="" tabindex="0">
-                        Amanda Seyfried
-                      </a>
-                    </h4>
-                    <div class="position">Sales &amp; Marketing</div>
-                    <div class="company">Alien Ltd.</div>
-                    <p>Consulting WP really helped us achieve our financial goals.
-                      The slick presentation along with fantastic readability ensures
-                      that our financial standing is stable.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="item text-white">
-              <div class="success_items">
-
-                <div class="user-profile-test">
-                  <a href="#"> <img src="img/testimonial/4.jpg" alt="Success" class="user_img img-fluid"></a>
-                </div>
-                <div class="text-md-left text-center">
-                  <div class="info">
-                    <h4 class="no_stripe">
-                      <a href="" tabindex="0">
-                        Amanda Seyfried
-                      </a>
-                    </h4>
-                    <div class="position">Sales &amp; Marketing</div>
-                    <div class="company">Alien Ltd.</div>
-                    <p>Consulting WP really helped us achieve our financial goals.
-                      The slick presentation along with fantastic readability ensures
-                      that our financial standing is stable.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>-->
-<section class="about-us-page">
-  <div class="partners">
-    <div class="container">
+  <div class="section-title text-center mb-5">
       <h2>Our Partners</h2>
-      <div class="partner-logos">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="client-outer">
-                <div class="slick-slider client-slider">
-                  <?php
-                  $partners = ['dci', 'highland', 'neicord', 'prime', 'rilum'];
-                  foreach ($partners as $partner) { ?>
-                    <div class="wow-outer" style="height:60px;width:10px;">
-                      <div class="item wow slideInLeft" data-wow-delay=".1s">
-                        <img src='img/client/<?= $partner ?>.png' alt="ucfirst(<?= $partner ?>) ">
-                      </div>
+    </div>
+    <div class="partner-logos">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="client-outer">
+              <div class="slick-slider client-slider">
+                <?php
+                $partners = ['dci', 'highland', 'neicord', 'prime', 'rilum'];
+                foreach ($partners as $partner) { ?>
+                  <div class="wow-outer" style="height:60px;width:10px;">
+                    <div class="item wow slideInLeft" data-wow-delay=".1s">
+                      <img src='img/client/<?= $partner ?>.png' alt="ucfirst(<?= $partner ?>) ">
                     </div>
-                  <?php } ?>
-                </div>
+                  </div>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -332,5 +238,5 @@
     </div>
   </div>
 </section>
-<?php require "partials/banner2.php"?>
+<?php require "partials/banner2.php" ?>
 <?php require "partials/footer.php" ?>

@@ -1,40 +1,56 @@
-<?php require "views/partials/header.php" ?>
+<?php require "partials/header.php" ?>
 <?php require "partials/banner.php" ?>
 
-<div class="classroom-container">
-    <div class="sidebar">
-        <h2>Lessons</h2>
-        <ul class="lesson-list">
-            <?php foreach ($courses as $course): ?>
-                <li class="lesson-item">
-                    <a href="#course-<?= $course['course_id'] ?>" class="lesson-link"><?= $course['title'] ?></a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-        <a href="/logout" class="btn btn-danger btn-block mt-4">Logout</a>
-    </div>
-    <div class="classroom-content">
-        <?php if (empty($courses)): ?>
-            <p>You have no courses enrolled.</p>
+<div class="clr-container">
+    <aside class="clr-sidebar">
+        <h2 class="clr-sidebar-title">Course Categories</h2>
+        <nav>
+            <ul class="clr-category-list">
+                <?php foreach ($categorizedCourses as $categoryId => $category): ?>
+                    <li class="clr-category-item">
+                        <a href="#category-<?= $categoryId ?>" class="clr-category-link"><?= htmlspecialchars($category['name']) ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </nav>
+        <a href="/logout" class="clr-btn-logout">Logout</a>
+    </aside>
+    <main class="clr-main-content">
+        <?php if (empty($categorizedCourses)): ?>
+            <p class="clr-no-courses">You are not assigned to any courses yet.</p>
         <?php else: ?>
-            <?php foreach ($courses as $course): ?>
-                <div id="course-<?= $course['course_id'] ?>" class="course-content">
-                    <div class="video-container">
-                        <div class="video-player">
-                            <video controls>
-                                <source src="<?= $course['video_url'] ?>" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <div class="video-info">
-                            <h3 class="video-title"><?= $course['title'] ?></h3>
-                            <p class="video-description"><?= $course['description'] ?></p>
-                        </div>
+            <?php foreach ($categorizedCourses as $categoryId => $category): ?>
+                <section id="category-<?= $categoryId ?>" class="clr-category-section">
+                    <h2 class="clr-category-title"><?= htmlspecialchars($category['name']) ?></h2>
+                    <div class="clr-course-grid">
+                        <?php foreach ($category['courses'] as $course): ?>
+                            <article class="clr-course-card">
+                                <div class="clr-course-media">
+                                    <?php if ($course['image_path']):?>
+                                        <img src="<?= $course['image_path'] ?>" alt="<?= htmlspecialchars($course['title']) ?>" class="clr-course-image">
+                                       
+                                    <?php elseif ($course['video_url']): ?>
+                                        <video controls class="clr-course-video">
+                                            <source src="<?= $course['video_url'] ?>" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    <?php else: ?>
+                                        <div class="clr-placeholder-image">No media available</div>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="clr-course-info">
+                                    <h3 class="clr-course-title"><?= htmlspecialchars($course['title']) ?></h3>
+                                    <p class="clr-course-description"><?= htmlspecialchars($course['description']) ?></p>
+                                    <a href="/classroom?id=<?= $course['course_id'] ?>" class="clr-btn-course">Go to Course</a>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
                     </div>
-                </div>
+                </section>
             <?php endforeach; ?>
         <?php endif; ?>
-    </div>
+    </main>
 </div>
+
 <?php require "partials/banner2.php" ?>
-<?php require "views/partials/footer.php" ?>
+<?php require "partials/footer.php" ?>

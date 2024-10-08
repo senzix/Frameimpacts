@@ -1,7 +1,6 @@
 <?php require "partials/header.php" ?>
 <?php require "partials/banner.php" ?>
-<div class="section-title text-center mb-5">
-    <h2>Proneurship</h2>
+<div class="section-title text-center mt-5">
     <p class="lead">Shaping the Next Generation of Entrepreneurs in Northeast India</p>
 </div>
 <section class="proneurship-content">
@@ -22,6 +21,7 @@
             </div>
             <div class="col-lg-6">
                 <img src="img/proneurship.webp" alt="Proneurship" class="img-fluid rounded">
+                <a href="pdf/proneurship/Introducing Proneurship_ Shaping the Next Generation of Entrepreneurs.pdf" class="cta-button" target="_blank">View Brochure</a>
             </div>
         </div>
     </div>

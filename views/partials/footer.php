@@ -1,11 +1,9 @@
 <footer id="footer" class="footer">
-<div
-class="parallax-bg">
+  <div class="parallax-bg">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-8 col-md-7">
-          <h2 class="footer-heading">Featured Insights: Frameimpacts' most inspiring thought leadership on issues
-            shaping the future of business and society.</h2>
+          <h2 class="footer-heading">Discover Frame Impacts' most compelling thought leadership on the issues shaping the future of business and society.</h2>
         </div>
         <div class="col-lg-4 col-md-5">
           <form class="footer-subscribe-form" id="newsletterForm">
@@ -40,12 +38,12 @@ class="parallax-bg">
         </div>
       </div>
       <div class="footer-links">
-        <p>&copy; 2024 Frameimpacts. All rights reserved. |
+        <p>&copy; 2024 Frame Impacts Private Limited | All rights reserved. |
           <a href="#">Careers</a> |
           <a href="contact">Contact</a> |
-          <a href="our-team">Our Team</a> |
+          <a href="our-team">Our Teams</a> |
           <a href="articles">Articles</a> |
-          <a href="aboutus">About</a> |
+          <a href="aboutus">About Us</a> |
           <a href="#">Offices</a> |
           <a href="#">Privacy Policy</a> |
           <a href="#">Terms of Use</a> |
@@ -61,8 +59,100 @@ class="parallax-bg">
       </div>
     </div>
   </div>
+
+  <!-- Cookie Consent Banner -->
+  <?php if (!isset($_COOKIE['cookie_consent']) || $_COOKIE['cookie_consent'] !== 'accepted'): ?>
+  <div id="cookie-consent-banner" style="position: fixed; bottom: 0; width: 100%; background-color: #f1f1f1; padding: 10px; text-align: center; z-index: 1000;">
+    <p>This website uses cookies to enhance your experience. By continuing to use this site, you agree to our use of cookies.</p>
+    <button onclick="acceptCookies()">Accept</button>
+    <button onclick="declineCookies()">Decline</button>
+  </div>
+  <?php endif; ?>
+
+  <script>
+  function acceptCookies() {
+    document.cookie = "cookie_consent=accepted; max-age=" + (24 * 60 * 60) + "; path=/";
+    document.getElementById('cookie-consent-banner').style.display = 'none';
+    
+    // Set a timeout to show the banner again after one day
+    setTimeout(function() {
+      document.cookie = "cookie_consent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.getElementById('cookie-consent-banner').style.display = 'block';
+    }, 24 * 60 * 60 * 1000); // Show again after 1 day
+  }
+
+  function declineCookies() {
+    // Do not set a cookie when declining
+    // Instead, just hide the banner temporarily
+    document.getElementById('cookie-consent-banner').style.display = 'none';
+    
+    // Set a timeout to show the banner again after a short delay
+    setTimeout(function() {
+      document.getElementById('cookie-consent-banner').style.display = 'block';
+    }, 10000); // Show again after 10 seconds
+  }
+
+  // Check and show the banner on page load if not accepted
+  window.onload = function() {
+    if (document.cookie.indexOf('cookie_consent=accepted') === -1) {
+      document.getElementById('cookie-consent-banner').style.display = 'block';
+    }
+  }
+  </script>
 </footer>
-<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;">
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "Frame Impacts",
+  "url": "https://www.frameimpacts.com",
+  "logo": "https://www.frameimpacts.com/img/logo.png",
+  "sameAs": [
+    "https://www.linkedin.com/in/frameimpacts",
+    "https://www.facebook.com/profile.php?id=61563545922308",
+    "https://www.instagram.com/frame_impacts"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-7005223226",
+    "contactType": "customer service"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Jamsuan Rd, Elim Veng, New Lamka",
+    "addressLocality": "Churachandpur",
+    "addressRegion": "Manipur",
+    "postalCode": "795128",
+    "addressCountry": "India"
+  },
+  "description": "Frame Impacts is a leading consultancy firm driving innovation and growth across industries in Northeast India. We provide strategic insights and tailored solutions to help organizations overcome challenges and achieve success."
+}
+</script>
+
+<!-- Lazy Loading Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target;
+          lazyImage.src = lazyImage.dataset.src;
+          lazyImage.classList.remove("lazy");
+          lazyImageObserver.unobserve(lazyImage);
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage);
+    });
+  }
+});
+</script><a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;">
   <i class="fas fa-long-arrow-alt-up"></i></a>
 
 <!-- Optional JavaScript -->
@@ -593,44 +683,7 @@ class="parallax-bg">
 
   });
 </script>
-
-
-
-<script>
-  $(document).ready(function () {
-    // Show login modal when the "Student Login" link is clicked
-    $('a[href="#"][data-toggle="modal"][data-target="#loginModal"]').click(function (e) {
-      e.preventDefault();
-      $('#loginModal').modal('show');
-    });
-
-    $('#switchToRegister').click(function () {
-      $('#loginModal').modal('hide');
-      $('#registerModal').modal('show');
-    });
-
-    $('#switchToLogin').click(function () {
-      $('#registerModal').modal('hide');
-      $('#loginModal').modal('show');
-    });
-
-    $('#loginForm').submit(function (e) {
-      e.preventDefault();
-      // Add your login logic here
-      console.log('Login submitted');
-    });
-
-    $('#registerForm').submit(function (e) {
-      e.preventDefault();
-      // Add your registration logic here
-      console.log('Registration submitted');
-    });
-  });
-</script>
-
-
-
-
 </body>
 
+</html>
 </html>

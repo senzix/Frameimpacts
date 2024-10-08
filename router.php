@@ -83,7 +83,6 @@ class Router
 
     private function handleNotFound()
     {
-        header("HTTP/1.0 404 Not Found");
         require 'views/404.php';
     }
 }
@@ -105,13 +104,11 @@ $router->addRoute('/login', 'controllers/login.php', ['GET', 'POST']);
 $router->addRoute('/register', 'controllers/register.php',['GET','POST']);
 $router->addRoute('/psychometric-test', 'controllers/psychometric-test.php',['GET','POST']);
 // Logout route
-$router->addRoute('/logout', 'controllers/logout.php', ['GET']);
+$router->addRoute('/logout','controllers/logout.php', ['GET']);
 
-// Add the newsletter subscription route
-$router->addRoute('/newsletter-subscribe', function() {
-    $router = new Router();
-    $router->handleNewsletterSubscription();
-}, ['POST']);
+// Admin route
+$router->addRoute('/adminlogin', 'controllers/adminlogin.php',['GET','POST']);
+$router->addRoute('/admin','controllers/admin.php',['GET','POST']);
 
 // Dispatch the current request
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
