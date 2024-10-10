@@ -1,6 +1,6 @@
 <?php require "partials/header.php" ?>
 
-<div class="slider-section" style="background: linear-gradient(to right, #211265, #6d68d1);">
+<div class="slider-section">
   <!-- revolution slider -->
   <section class="no-top no-bottom" aria-label="section-slider">
     <!-- home -->
@@ -9,7 +9,8 @@
         <ul>
           <?php foreach ($sliderItems as $item): ?>
             <li data-transition="fade" data-slotamount="10" data-masterspeed="1200" data-delay="5000">
-              <!-- Removed background image -->
+              <!-- Added background image -->
+              <img src="<?= $item['image'] ?>" alt="<?= $item['heading'] ?>" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
               <div class="tp-caption slide-big-heading sft" data-x="center" data-y="160" data-speed="800" data-start="400"
                 data-easing="easeInOutExpo" data-endspeed="450"><span style="color:#ffffff;">
                   <?= $item['heading'] ?></span>

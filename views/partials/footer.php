@@ -61,7 +61,7 @@
   </div>
 
   <!-- Cookie Consent Banner -->
-  <?php if (!isset($_COOKIE['cookie_consent']) || $_COOKIE['cookie_consent'] !== 'accepted'): ?>
+  <?php if (!isset($_COOKIE['cookie_consent'])): ?>
   <div id="cookie-consent-banner" style="position: fixed; bottom: 0; width: 100%; background-color: #f1f1f1; padding: 10px; text-align: center; z-index: 1000;">
     <p>This website uses cookies to enhance your experience. By continuing to use this site, you agree to our use of cookies.</p>
     <button onclick="acceptCookies()">Accept</button>
@@ -71,30 +71,20 @@
 
   <script>
   function acceptCookies() {
-    document.cookie = "cookie_consent=accepted; max-age=" + (24 * 60 * 60) + "; path=/";
+    // Set cookie with a longer expiration (e.g., 30 days)
+    document.cookie = "cookie_consent=accepted; max-age=" + (30 * 24 * 60 * 60) + "; path=/; SameSite=Lax";
     document.getElementById('cookie-consent-banner').style.display = 'none';
-    
-    // Set a timeout to show the banner again after one day
-    setTimeout(function() {
-      document.cookie = "cookie_consent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.getElementById('cookie-consent-banner').style.display = 'block';
-    }, 24 * 60 * 60 * 1000); // Show again after 1 day
   }
 
   function declineCookies() {
-    // Do not set a cookie when declining
-    // Instead, just hide the banner temporarily
+    // Set a "declined" cookie with a shorter expiration (e.g., 1 day)
+    document.cookie = "cookie_consent=declined; max-age=" + (24 * 60 * 60) + "; path=/; SameSite=Lax";
     document.getElementById('cookie-consent-banner').style.display = 'none';
-    
-    // Set a timeout to show the banner again after a short delay
-    setTimeout(function() {
-      document.getElementById('cookie-consent-banner').style.display = 'block';
-    }, 10000); // Show again after 10 seconds
   }
 
-  // Check and show the banner on page load if not accepted
+  // Check and show the banner on page load if no decision has been made
   window.onload = function() {
-    if (document.cookie.indexOf('cookie_consent=accepted') === -1) {
+    if (document.cookie.indexOf('cookie_consent=') === -1) {
       document.getElementById('cookie-consent-banner').style.display = 'block';
     }
   }

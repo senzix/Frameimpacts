@@ -2,9 +2,13 @@
 $config = require 'config.php';
 $db = new Database($config['database']);
 
-$header = "Login";
-
 session_start();
+
+$header = "Login";
+if (isset($_SESSION['user_id'])) {
+    header('Location: /');
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];

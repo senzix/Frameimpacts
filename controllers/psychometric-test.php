@@ -6,12 +6,12 @@ $header = 'Psychometric Test';
 
 session_start();
 // Ensure the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header('Location: /login');
+if (!isset($_SESSION['test_user_id'])) {
+    header('Location: /test_user_details');
     exit();
 }
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['test_user_id'];
 // Handle test requests
 $testType = $_GET['test'] ?? null;
 
@@ -35,12 +35,12 @@ switch ($testType) {
             $data = json_decode(file_get_contents('php://input'), true);
 
             // Ensure user is logged in
-            if (!isset($_SESSION['user_id'])) {
+            if (!isset($_SESSION['test_user_id'])) {
                 echo json_encode(['success' => false, 'message' => 'User not logged in']);
                 exit;
             }
 
-            $user_id = $_SESSION['user_id'];
+            $user_id = $_SESSION['test_user_id'];
             $correct_count = $data['correctCount'];
             $total_questions = $data['totalQuestions'];
             $percentage = $data['percentage'];
@@ -75,49 +75,55 @@ switch ($testType) {
         break;
 
     case 'view_results':
-        if (!isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['test_user_id'])) {
             header('Location: /login');
             exit();
         }
 
-        $user_id = $_SESSION['user_id'];
+        $user_id = $_SESSION['test_user_id']; // Change this line
 
         if (isset($_GET['id'])) {
             // Fetch and display a specific result
             $result_id = intval($_GET['id']);
-            $query = "SELECT * FROM test_results WHERE id = :id AND user_id = :user_id";
+            $query = "SELECT tr.*, tu.name, tu.gmail, tu.phone, tu.location 
+                      FROM test_results tr 
+                      JOIN test_users tu ON tr.user_id = tu.test_user_id 
+                      WHERE tr.id = :id AND tr.user_id = :user_id";
             $params = [':id' => $result_id, ':user_id' => $user_id];
-
+    
             try {
                 $result = $db->query($query, $params)->fetch();
-
+    
                 if (!$result) {
                     $error = "No test result found.";
                     require "views/error.view.php";
                     return;
                 }
-
+    
                 $detailed_results = json_decode($result['detailed_results'], true);
-
+    
                 // Check if the user wants to download the PDF
                 if (isset($_GET['download']) && $_GET['download'] === 'pdf') {
                     require_once 'vendor/autoload.php'; // Make sure you have TCPDF installed via Composer
-
+    
                     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
                     $pdf->SetCreator(PDF_CREATOR);
                     $pdf->SetAuthor('Your Company Name');
-                    $pdf->SetTitle('Test Result');
+                    $pdf->SetTitle('Test Result for ' . $result['name']);
                     $pdf->SetSubject('Test Result');
                     $pdf->SetKeywords('Test, Result, PDF');
-
+    
                     $pdf->AddPage();
-
-                    $html = '<h1>Test Result</h1>';
+    
+                    $html = '<h1>Test Result for ' . htmlspecialchars($result['name']) . '</h1>';
+                    $html .= '<p>Email: ' . htmlspecialchars($result['gmail']) . '</p>';
+                    $html .= '<p>Phone: ' . htmlspecialchars($result['phone']) . '</p>';
+                    $html .= '<p>Location: ' . htmlspecialchars($result['location']) . '</p>';
                     $html .= '<p>Test taken on: ' . date('F j, Y, g:i a', strtotime($result['created_at'])) . '</p>';
                     $html .= '<p>Test type: ' . htmlspecialchars(ucfirst($result['test_type'])) . '</p>';
                     $html .= '<p>Correct answers: ' . $result['correct_count'] . ' out of ' . $result['total_questions'] . '</p>';
                     $html .= '<p>Score: ' . number_format($result['percentage'], 2) . '%</p>';
-
+    
                     foreach ($detailed_results as $index => $question) {
                         $html .= '<h3>Question ' . ($index + 1) . '</h3>';
                         $html .= '<p>' . htmlspecialchars($question['question']) . '</p>';
@@ -133,13 +139,12 @@ switch ($testType) {
                             $html .= '</p>';
                         }
                     }
-
+    
                     $pdf->writeHTML($html, true, false, true, false, '');
-
                     $pdf->Output('test_result_' . $result['id'] . '.pdf', 'D');
                     exit;
                 }
-
+    
                 require "views/psychometric/view_detailed_result.view.php";
             } catch (Exception $e) {
                 error_log('Error fetching test result: ' . $e->getMessage());

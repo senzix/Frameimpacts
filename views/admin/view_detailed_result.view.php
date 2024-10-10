@@ -1,8 +1,17 @@
-<h2 class="mb-4">Detailed Test Result for <?= htmlspecialchars($result['username']) ?></h2>
-<p>Test taken on: <?= date('F j, Y, g:i a', strtotime($result['created_at'])) ?></p>
-<p>Test type: <?= htmlspecialchars(ucfirst($result['test_type'])) ?></p>
-<p>Correct answers: <?= $result['correct_count'] ?> out of <?= $result['total_questions'] ?></p>
-<p>Score: <?= number_format($result['percentage'], 2) ?>%</p>
+<h2 class="mb-4">Detailed Test Result for <?= htmlspecialchars($result['name']) ?></h2>
+<div class="row">
+    <div class="col-md-6">
+        <p>Email: <?= htmlspecialchars($result['gmail']) ?></p>
+        <p>Phone: <?= htmlspecialchars($result['phone']) ?></p>
+        <p>Location: <?= htmlspecialchars($result['location']) ?></p>
+    </div>
+    <div class="col-md-6">
+        <p>Test taken on: <?= date('F j, Y, g:i a', strtotime($result['created_at'])) ?></p>
+        <p>Test type: <?= htmlspecialchars(ucfirst($result['test_type'])) ?></p>
+        <p>Correct answers: <?= $result['correct_count'] ?> out of <?= $result['total_questions'] ?></p>
+        <p>Score: <?= number_format($result['percentage'], 2) ?>%</p>
+    </div>
+</div>
 
 <div class="results-container">
     <?php foreach ($detailed_results as $index => $question): ?>
@@ -29,7 +38,14 @@
     <?php endforeach; ?>
 </div>
 
-<a href="?action=user_results&user_id=<?= $result['user_id'] ?>" class="btn btn-primary mt-3">Back to User Results</a>
+<div class="row mt-3">
+    <div class="col-sm-6 mb-2">
+        <a href="?action=user_results&test_user_id=<?= $result['user_id'] ?>" class="btn btn-primary btn-block">Back to User Results</a>
+    </div>
+    <div class="col-sm-6 mb-2">
+        <a href="?action=download_result_pdf&id=<?= $result['id'] ?>" class="btn btn-secondary btn-block">Download PDF</a>
+    </div>
+</div>
 
 <style>
     .results-container {
@@ -59,6 +75,7 @@
     }
     .option-text {
         flex: 1;
+        word-break: break-word;
     }
     .user-selected {
         background-color: #f8d7da;
@@ -68,5 +85,18 @@
     }
     .user-mark, .correct-mark {
         margin-left: 10px;
+    }
+    @media (max-width: 576px) {
+        .option {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .option-letter {
+            margin-bottom: 5px;
+        }
+        .user-mark, .correct-mark {
+            margin-left: 0;
+            margin-top: 5px;
+        }
     }
 </style>

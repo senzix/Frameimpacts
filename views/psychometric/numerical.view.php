@@ -149,6 +149,13 @@
 
         resultHtml += '</div>';
         
+        // Add download button
+        resultHtml += `
+            <div class="download-container">
+                <button id="download-pdf" class="download-button">Download Results as PDF</button>
+            </div>
+        `;
+        
         document.querySelector('.question-container').innerHTML = resultHtml;
         document.querySelector('.progress').style.width = '100%';
 
@@ -191,6 +198,23 @@
             .user-mark, .correct-mark {
                 margin-left: 10px;
             }
+            .download-container {
+                margin-top: 20px;
+                text-align: center;
+            }
+            .download-button {
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .download-button:hover {
+                background-color: #45a049;
+            }
         `;
         document.head.appendChild(style);
 
@@ -206,21 +230,29 @@
                 detailedResults: detailedResults
             }),
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (data.success) {
                 console.log('Results stored successfully');
+                // Add the result ID to the download button
+                document.getElementById('download-pdf').setAttribute('data-result-id', data.result_id);
             } else {
                 console.error('Failed to store results:', data.message);
             }
         })
         .catch(error => {
             console.error('Error storing results:', error);
+        });
+
+        // Add event listener for download button
+        document.getElementById('download-pdf').addEventListener('click', (e) => {
+            e.preventDefault();
+            const resultId = e.target.getAttribute('data-result-id');
+            if (resultId) {
+                window.location.href = `?test=view_results&id=${resultId}&download=pdf`;
+            } else {
+                console.error('No result ID available for download');
+            }
         });
     }
 
@@ -252,6 +284,13 @@
     // const timerInterval = setInterval(() => { ... });
 
     // Rest of the existing JavaScript code
+
+    // Add event listener for download button
+    document.getElementById('download-pdf').addEventListener('click', (e) => {
+        e.preventDefault();
+        const resultId = e.target.getAttribute('data-result-id');
+        window.location.href = `?test=view_results&id=${resultId}&download=pdf`;
+    });
 </script>
 
 <style>

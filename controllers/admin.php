@@ -548,10 +548,10 @@ switch ($action) {
         exit;
 
     case 'view_results':
-        $users_with_tests = $db->query("SELECT DISTINCT u.user_id, u.username, MAX(t.created_at) as last_test_date 
-                                            FROM users u 
-                                            JOIN test_results t ON u.user_id = t.user_id 
-                                            GROUP BY u.user_id 
+        $test_users_with_tests = $db->query("SELECT DISTINCT tu.test_user_id, tu.name, tu.gmail, tu.phone, tu.location, MAX(tr.created_at) as last_test_date 
+                                            FROM test_users tu 
+                                            JOIN test_results tr ON tu.test_user_id = tr.user_id 
+                                            GROUP BY tu.test_user_id 
                                             ORDER BY last_test_date DESC")->fetchAll();
         ob_start();
         require 'views/admin/view_results.view.php';
@@ -559,16 +559,17 @@ switch ($action) {
         break;
 
     case 'user_results':
-        $user_id = $_GET['user_id'];
-        $user = $db->query("SELECT username FROM users WHERE user_id = :user_id", [':user_id' => $user_id])->fetch();
-        $results = $db->query("SELECT * FROM test_results WHERE user_id = :user_id ORDER BY created_at DESC", [':user_id' => $user_id])->fetchAll();
+        $test_user_id = $_GET['test_user_id'];
+        $test_user = $db->query("SELECT * FROM test_users WHERE test_user_id = :test_user_id", [':test_user_id' => $test_user_id])->fetch();
+        $results = $db->query("SELECT * FROM test_results WHERE user_id = :user_id ORDER BY created_at DESC", ['user_id' => $test_user_id])->fetchAll();
         ob_start();
         require 'views/admin/user_results.view.php';
         $content = ob_get_clean();
         break;
+
     case 'view_detailed_result':
         $id = $_GET['id'];
-        $result = $db->query("SELECT t.*, u.username FROM test_results t JOIN users u ON t.user_id = u.user_id WHERE t.id = :id", [':id' => $id])->fetch();
+        $result = $db->query("SELECT tr.*, tu.name, tu.gmail, tu.phone, tu.location FROM test_results tr JOIN test_users tu ON tr.user_id = tu.test_user_id WHERE tr.id = :id", [':id' => $id])->fetch();
         $detailed_results = json_decode($result['detailed_results'], true);
         ob_start();
         require 'views/admin/view_detailed_result.view.php';
@@ -577,7 +578,7 @@ switch ($action) {
 
     case 'download_result_pdf':
         $id = $_GET['id'];
-        $result = $db->query("SELECT t.*, u.username FROM test_results t JOIN users u ON t.user_id = u.user_id WHERE t.id = :id", [':id' => $id])->fetch();
+        $result = $db->query("SELECT tr.*, tu.name, tu.gmail, tu.phone, tu.location FROM test_results tr JOIN test_users tu ON tr.user_id = tu.test_user_id WHERE tr.id = :id", [':id' => $id])->fetch();
         $detailed_results = json_decode($result['detailed_results'], true);
 
         require_once 'vendor/autoload.php'; // Make sure you have TCPDF installed via Composer
@@ -585,13 +586,16 @@ switch ($action) {
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('Your Company Name');
-        $pdf->SetTitle('Test Result for ' . $result['username']);
+        $pdf->SetTitle('Test Result for ' . $result['name']);
         $pdf->SetSubject('Test Result');
         $pdf->SetKeywords('Test, Result, PDF');
 
         $pdf->AddPage();
 
-        $html = '<h1>Test Result for ' . htmlspecialchars($result['username']) . '</h1>';
+        $html = '<h1>Test Result for ' . htmlspecialchars($result['name']) . '</h1>';
+        $html .= '<p>Email: ' . htmlspecialchars($result['gmail']) . '</p>';
+        $html .= '<p>Phone: ' . htmlspecialchars($result['phone']) . '</p>';
+        $html .= '<p>Location: ' . htmlspecialchars($result['location']) . '</p>';
         $html .= '<p>Test taken on: ' . date('F j, Y, g:i a', strtotime($result['created_at'])) . '</p>';
         $html .= '<p>Test type: ' . htmlspecialchars(ucfirst($result['test_type'])) . '</p>';
         $html .= '<p>Correct answers: ' . $result['correct_count'] . ' out of ' . $result['total_questions'] . '</p>';
@@ -624,12 +628,12 @@ switch ($action) {
             $correct_count = $_POST['correct_count'];
             $total_questions = $_POST['total_questions'];
             $percentage = ($correct_count / $total_questions) * 100;
-            $query = "UPDATE test_results SET correct_count = :correct_count, percentage = :percentage WHERE id = :id";
-            $db->query($query, [':correct_count' => $correct_count, ':percentage' => $percentage, ':id' => $id]);
-            header("Location: admin?action=user_results&user_id=" . $_POST['user_id']);
+            $query = "UPDATE test_results SET correct_count = :correct_count, total_questions = :total_questions, percentage = :percentage WHERE id = :id";
+            $db->query($query, [':correct_count' => $correct_count, ':total_questions' => $total_questions, ':percentage' => $percentage, ':id' => $id]);
+            header("Location: admin?action=user_results&test_user_id=" . $_POST['test_user_id']);
             exit;
         }
-        $result = $db->query("SELECT t.*, u.username FROM test_results t JOIN users u ON t.user_id = u.user_id WHERE t.id = :id", [':id' => $id])->fetch();
+        $result = $db->query("SELECT tr.*, tu.name, tu.gmail, tu.phone, tu.location FROM test_results tr JOIN test_users tu ON tr.user_id = tu.test_user_id WHERE tr.id = :id", [':id' => $id])->fetch();
         ob_start();
         require 'views/admin/edit_result.view.php';
         $content = ob_get_clean();

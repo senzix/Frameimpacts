@@ -103,6 +103,7 @@ $router->addRoute('/classroom', 'controllers/classroom.php', ['GET', 'POST']);
 $router->addRoute('/login', 'controllers/login.php', ['GET', 'POST']);
 $router->addRoute('/register', 'controllers/register.php',['GET','POST']);
 $router->addRoute('/psychometric-test', 'controllers/psychometric-test.php',['GET','POST']);
+$router->addRoute('/test_user_details', 'controllers/test_user_details.php',['GET','POST']);
 // Logout route
 $router->addRoute('/logout','controllers/logout.php', ['GET']);
 

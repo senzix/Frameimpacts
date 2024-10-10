@@ -12,7 +12,7 @@ $sliderItems = [
         'buttonLink' => '/proneurship'
     ],
     [
-        'image' => 'img/Background.png',
+        'image' => 'img/slide2.png',
         'heading' => 'Consult your Business',
         'buttonText' => 'More Detail',
         'buttonLink' => '/industry?p_id=business'
@@ -24,7 +24,7 @@ $sliderItems = [
         'buttonLink' => '/industry?p_id=social'
     ],
     [
-        'image' => 'img/Background.png',
+        'image' => 'img/slide2.png',
         'heading' => 'Consult about your health care',
         'buttonText' => 'More Detail',
         'buttonLink' => '/industry?p_id=health'

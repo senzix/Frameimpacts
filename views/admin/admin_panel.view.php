@@ -9,7 +9,7 @@
     <link href="views/admin/admin_style.css?v=1.1" rel="stylesheet">
 </head>
 <body>
-    <div class="wrapper">
+<div class="wrapper">
         <!-- Sidebar -->
         <nav id="sidebar">
             <div class="sidebar-header">
@@ -70,6 +70,7 @@
                 </div>
             </nav>
 
+
             <!-- Main Content -->
             <div class="container-fluid mt-4">
                 <?php
@@ -89,6 +90,7 @@
             </footer>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
