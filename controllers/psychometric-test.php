@@ -142,6 +142,11 @@ switch ($testType) {
     
                     $pdf->writeHTML($html, true, false, true, false, '');
                     $pdf->Output('test_result_' . $result['id'] . '.pdf', 'D');
+                    
+                    // Unset the test_user_id session after downloading
+                    unset($_SESSION['test_user_id']);
+                    session_destroy();
+                    
                     exit;
                 }
     

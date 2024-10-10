@@ -40,8 +40,12 @@ $location = "";
                             <input type="tel" id="reg-mobile" name="phone" value="<?= htmlspecialchars($phone) ?>" required class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="reg-location">location:</label>
-                            <input type="text" id="reg-location" name="location" value="<?= htmlspecialchars($location) ?>" required class="form-control">
+                            <label for="reg-location">Location:</label>
+                            <select id="reg-location" name="location" required class="form-control border-0">
+                                <option value="">Select a location</option>
+                                <option value="Lamka" <?= $location === 'Lamka' ? 'selected' : '' ?>>Lamka</option>
+                                <option value="Shillong" <?= $location === 'Shillong' ? 'selected' : '' ?>>Shillong</option>
+                            </select>
                         </div>
                         <button type="submit" class="btn-custom">Proceed</button>
                     </form>

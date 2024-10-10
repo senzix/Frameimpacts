@@ -13,7 +13,7 @@ require "views/partials/header.php";
             <p>With six primary test providers and numerous variations of the numerical reasoning test, properly
                 preparing can be a challenge. JobTestPrep has put together a free sample test, taking into account the
                 styles and formats of all test providers.</p>
-            <p><a href="?test=numerical">Take a free numerical test now.</a> | <a href="?test=view_results">View previous results</a></p>
+            <p><a href="?test=numerical">Take a free numerical test now.</a> <!--| <a href="?test=view_results">View previous results</a>--></p>
 
             <h4>Career Guidance Test</h4>
             <p>Discover which career paths best suit your skills, interests, and personality. Our comprehensive career guidance test analyzes your responses to provide tailored advice on potential career options that align with your strengths and preferences.</p>
